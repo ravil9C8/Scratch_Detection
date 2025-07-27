@@ -1,5 +1,5 @@
 train densenet121
-python -m models.classifier.train --root /home/ravil/assignment_mowito/data/anomaly_detection_test_data --epochs 1 --bs 8 --lr 3e-4 --out /home/ravil/assignment_mowito/weights/classifier
+python -m models.classifier.train --root /home/ravil/assignment_mowito/data/anomaly_detection_test_data/train --epochs 1 --bs 8 --lr 3e-4 --out /home/ravil/assignment_mowito/weights/classifier
 
 test densenet121
 python -m models.classfier.test

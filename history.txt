@@ -1,0 +1,20 @@
+first classifier i trained is densent121 
+Epoch 1 only, Epoch 01: loss 0.4269  recall 0.990  precision 1.000 
+python -m models.classifier.train --root /home/ravil/assignment_mowito/data/anomaly_detection_test_data --epochs 1 --bs 8 --lr 3e-4 --out /home/ravil/assignment_mowito/weights/classifier
+val split was 0.10.
+
+second iteration 
+/home/ravil/assignment_mowito/weights/classifier/densenet121_80per.pt, test(20 percent) and train(80 percent) were split before and then train was split into val and train with 10 and 90
+Training on folder /home/ravil/assignment_mowito/data/anomaly_detection_test_data/train
+Epoch 01: loss 0.4613  recall 1.000  precision 1.000
+Testing on folder - /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test
+(assignment-mowito) ravil@ravil-ThinkPad-E14-Gen-5:~/assignment_mowito$ python -m models.classifier.test_full
+Evaluating: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 130/130 [01:02<00:00,  2.09it/s]
+
+Evaluation complete ───────────────
+Samples     : 1036  (good=831, bad=205)
+TP / FP / TN / FN : 197 / 0 / 831 / 8
+Precision   : 1.000
+Recall      : 0.961
+Specificity : 1.000
+Elapsed     : 62.1s
