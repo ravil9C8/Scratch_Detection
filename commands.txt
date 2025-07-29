@@ -3,3 +3,8 @@ python -m models.classifier.train --root /home/ravil/assignment_mowito/data/anom
 
 test densenet121
 python -m models.classfier.test
+
+train unet
+python -m models.unet.train_unet --root /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/train --bs 16 --epochs 20 --lr 2e-4 --out /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/weights/unet
+
+test unet

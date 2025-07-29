@@ -56,3 +56,51 @@ False-Negative images (predicted good but actually bad):
   /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code01864.png
   /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code01951.png
   /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code03810.png
+
+4th iteration - 
+
+Train and val results - 
+Epoch 01 | TrainLoss 0.7163 | ValLoss 0.6434 | ValDice 0.458                                                                                                                               
+  ↳ New best model saved (Dice=0.458)
+Epoch 02 | TrainLoss 0.5940 | ValLoss 0.5605 | ValDice 0.693                                                                                                                               
+  ↳ New best model saved (Dice=0.693)
+Epoch 03 | TrainLoss 0.5550 | ValLoss 0.5352 | ValDice 0.893                                                                                                                               
+  ↳ New best model saved (Dice=0.893)
+Epoch 04 | TrainLoss 0.5352 | ValLoss 0.5248 | ValDice 0.904                                                                                                                               
+  ↳ New best model saved (Dice=0.904)
+Epoch 05 | TrainLoss 0.5234 | ValLoss 0.4523 | ValDice 0.908                                                                                                                               
+  ↳ New best model saved (Dice=0.908)
+Epoch 06 | TrainLoss 0.4527 | ValLoss 0.4858 | ValDice 0.589                                                                                                                               
+Epoch 07 | TrainLoss 0.3610 | ValLoss 0.2947 | ValDice 0.753                                                                                                                               
+Epoch 08 | TrainLoss 0.1907 | ValLoss 0.1405 | ValDice 0.837                                                                                                                               
+Epoch 09 | TrainLoss 0.1528 | ValLoss 0.1404 | ValDice 0.824                                                                                                                               
+Epoch 10 | TrainLoss 0.1423 | ValLoss 0.1052 | ValDice 0.868     
+
+Test results
+
+────────── Evaluation Summary ──────────
+Images        : 1036
+Pixel Dice    : 0.916
+Pixel IoU     : 0.887
+Precision     : 0.984
+Recall        : 0.922
+Specificity   : 0.996
+Elapsed       : 1.5s
+
+False-negative images (bad → predicted good):
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/09_08_2024_18_21_00.844774_classifier_input.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/16_08_2024_13_34_25.067846_classifier_input.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/23_09_2024_12_09_28.917367_cls_input.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code00096.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code00113.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code00993.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01860.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01864.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01947.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01951.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code02064.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03669.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03757.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03810.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03819.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03979.png
