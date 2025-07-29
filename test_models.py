@@ -31,13 +31,14 @@ import albumentations as A
 from albumentations.pytorch import ToTensorV2
 import matplotlib.pyplot as plt
 import segmentation_models_pytorch as smp
-
+import os
 # ────────── USER CONFIG ───────────────────────────────────
 IMG_PATH     = Path("/home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/09_08_2024_18_34_16.316934_classifier_input.png")
 MASK_PATH    = Path("/home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/masks/09_08_2024_18_34_16.316934_classifier_input.png")         # GT mask (binary)
-CKPT_DENSE_LB= Path("/home/ravil/assignment_mowito/weights/classifier/densenet121_best.pt")
-CKPT_DENSE_RS= Path("/home/ravil/assignment_mowito/weights/classifier/densenet121_without_letterboxing.pt")
-CKPT_UNET    = Path("/home/ravil/assignment_mowito/weights/unet/unet_best_loss40_60.pt")
+BASE_DIR = Path.cwd()
+CKPT_DENSE_LB = BASE_DIR / "weights/classifier/densenet121_best.pt"
+CKPT_DENSE_RS = BASE_DIR / "weights/classifier/densenet121_without_letterboxing.pt"
+CKPT_UNET = BASE_DIR / "weights/unet/unet_best_loss40_60.pt"
 OUT_FIG      = Path("viz_unet_output.png")                  # saved figure
 DEVICE       = "cuda" if torch.cuda.is_available() else "cpu"
 # ──────────────────────────────────────────────────────────
