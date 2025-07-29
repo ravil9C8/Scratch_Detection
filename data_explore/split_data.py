@@ -1,8 +1,3 @@
-# split_data_folders.py
-# ------------------------------------------------------------
-# Creates train/ and test/ folders (80 / 20 stratified) under
-# /home/ravil/assignment_mowito/data/anomaly_detection_test_data
-# ------------------------------------------------------------
 import shutil, random, pathlib
 from sklearn.model_selection import train_test_split
 
@@ -37,7 +32,6 @@ def copy_sample(img_path: pathlib.Path, split: str):
     dest_dir.mkdir(parents=True, exist_ok=True)
     shutil.copy2(img_path, dest_dir / img_path.name)
 
-    # copy mask only for bad images
     if cls == "bad":
         mask_path = ROOT / "mask" / img_path.name
         if mask_path.exists():
@@ -58,6 +52,6 @@ train_bad  = count(ROOT / "train" / "bad")
 test_good  = count(ROOT / "test"  / "good")
 test_bad   = count(ROOT / "test"  / "bad")
 
-print("Split complete ✅")
+print("Split complete")
 print(f"Train : {train_good} good, {train_bad} bad")
 print(f"Test  : {test_good} good, {test_bad} bad")

@@ -1,8 +1,3 @@
-# test_full.py
-# ------------------------------------------------------------
-# Evaluate a trained DenseNet-121 scratch-detection model on a
-# *folder* of test images and report Precision, Recall & Specificity.
-# ------------------------------------------------------------
 import pathlib, time, torch, json
 from PIL import Image
 from torchvision import models
@@ -72,7 +67,7 @@ precision    = TP / (TP+FP+1e-8)
 recall       = TP / (TP+FN+1e-8)
 specificity  = TN / (TN+FP+1e-8)
 
-print("\nEvaluation complete ───────────────")
+print("\nEvaluation complete")
 print(f"Samples     : {len(all_paths)}  (good={len(good_imgs)}, bad={len(bad_imgs)})")
 print(f"TP / FP / TN / FN : {TP} / {FP} / {TN} / {FN}")
 print(f"Precision   : {precision:.3f}")
@@ -86,15 +81,3 @@ if fn_paths:
         print(f"  {p}")
 else:
     print("\nNo False-Negatives 🎉")
-# --------------------------- OPTIONAL: SAVE RAW RESULTS --------------
-# Uncomment to write filenames, labels, probabilities
-# out_json = TEST_ROOT/"predictions.json"
-# with open(out_json, "w") as f:
-#     json.dump(
-#         [
-#             {"file": str(p), "label": int(l), "prob_bad": float(pb)}
-#             for p,l,pb in zip(all_paths, all_lbls, probs.numpy())
-#         ],
-#         f, indent=2
-#     )
-# print(f"Raw predictions saved to {out_json}")

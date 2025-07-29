@@ -113,7 +113,7 @@ def get_val_transforms() -> T.Compose:
 if __name__ == "__main__":
     import pathlib, matplotlib.pyplot as plt
 
-    SAMPLE_PATH = next(pathlib.Path("dataset/good").glob("*"))  # pick one file
+    SAMPLE_PATH = "/home/ravil/assignment_mowito/data/anomaly_detection_test_data/train/bad/03_08_2024_16_59_07.698036_classifier_input.png"
     img = Image.open(SAMPLE_PATH).convert("RGB")
 
     for mode, tf in [("train", get_train_transforms()),
