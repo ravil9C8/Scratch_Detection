@@ -48,7 +48,7 @@ TP / FP / TN / FN : 199 / 4 / 827 / 6
 Precision   : 0.980
 Recall      : 0.971
 Specificity : 0.995
-
+transforms_resize.py in classifier branch.
 False-Negative images (predicted good but actually bad):
   /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/09_08_2024_18_21_00.844774_classifier_input.png
   /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/16_08_2024_13_34_25.067846_classifier_input.png
