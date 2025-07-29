@@ -25,7 +25,7 @@ The system uses:
 
 2. Create and activate a virtual environment
    ```bash
-   uv add .
+   uv sync
    source .venv/bin/activate
 ## Testing Models
 
