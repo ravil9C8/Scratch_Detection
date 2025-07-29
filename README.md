@@ -20,7 +20,7 @@ The system uses:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/scratch-detection.git
+   git clone [https://github.com/your-username/scratch-detection.git](https://github.com/ravil9C8/Scratch_Detection.git)
    cd scratch-detection
 
 2. Create and activate a virtual environment
