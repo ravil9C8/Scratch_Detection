@@ -7,7 +7,7 @@ This repository contains a scratch detection system using both classification an
 The system uses:
 - DenseNet121 classifiers (with and without letterboxing) for binary classification
 - U-Net for segmentation of scratch regions
-
+![Image Visualization](viz_unet_output.png)
 ## Setup
 
 ### Prerequisites
@@ -32,6 +32,8 @@ The system uses:
 ### Configuration 
 Edit the paths in test_models.py to match your environment
 
+
 ### Runnning the test
 ```bash
 python test_models.py
+
