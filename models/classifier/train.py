@@ -123,7 +123,7 @@ def main():
             best_recall = recall
             ckpt = {"model": model.state_dict(), "epoch": epoch,
                     "precision": precision, "recall": recall}
-            torch.save(ckpt, f"{args.out}/densenet121_best.pt")
+            torch.save(ckpt, f"{args.out}/densenet121_without_letterboxing.pt")
 
     print(f"Training done. Best recall {best_recall:.3f} saved to {args.out}/")
 
