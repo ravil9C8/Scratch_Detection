@@ -87,6 +87,8 @@ Recall        : 0.922
 Specificity   : 0.996
 Elapsed       : 1.5s
 
+Loss function Used  - loss = 0.6*dice_loss(logits, y) + 0.4*F.binary_cross_entropy_with_logits(logits, y)
+
 False-negative images (bad → predicted good):
    /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/09_08_2024_18_21_00.844774_classifier_input.png
    /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/16_08_2024_13_34_25.067846_classifier_input.png
@@ -104,3 +106,162 @@ False-negative images (bad → predicted good):
    /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03810.png
    /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03819.png
    /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03979.png
+
+Training curve - In this I tried with alpha values for the loss - alpha is 80
+Epoch 01 | TrainLoss 0.8406 | ValLoss 0.6259 | ValDice 0.746                                                                                                                               
+  ↳ New best model saved (Dice=0.746)
+Epoch 02 | TrainLoss 0.7389 | ValLoss 0.5519 | ValDice 0.755                                                                                                                               
+  ↳ New best model saved (Dice=0.755)
+Epoch 03 | TrainLoss 0.7093 | ValLoss 0.5477 | ValDice 0.699                                                                                                                               
+Epoch 04 | TrainLoss 0.6915 | ValLoss 0.5557 | ValDice 0.325                                                                                                                               
+Epoch 05 | TrainLoss 0.5807 | ValLoss 0.2888 | ValDice 0.684                                                                                                                               
+Epoch 06 | TrainLoss 0.3755 | ValLoss 0.3518 | ValDice 0.793                                                                                                                               
+  ↳ New best model saved (Dice=0.793)
+Epoch 07 | TrainLoss 0.1804 | ValLoss 0.1727 | ValDice 0.803                                                                                                                               
+  ↳ New best model saved (Dice=0.803)
+Epoch 08 | TrainLoss 0.1870 | ValLoss 0.1650 | ValDice 0.804                                                                                                                               
+  ↳ New best model saved (Dice=0.804)
+Epoch 09 | TrainLoss 0.1828 | ValLoss 0.1566 | ValDice 0.804                                                                                                                               
+Epoch 10 | TrainLoss 0.1654 | ValLoss 0.1512 | ValDice 0.813                                                                                                                               
+  ↳ New best model saved (Dice=0.813)
+Epoch 11 | TrainLoss 0.1597 | ValLoss 0.1414 | ValDice 0.837                                                                                                                               
+  ↳ New best model saved (Dice=0.837)
+Epoch 12 | TrainLoss 0.1840 | ValLoss 0.1656 | ValDice 0.804                                                                                                                               
+Epoch 13 | TrainLoss 0.1682 | ValLoss 0.1149 | ValDice 0.857                                                                                                                               
+  ↳ New best model saved (Dice=0.857)
+Epoch 14 | TrainLoss 0.1610 | ValLoss 0.1612 | ValDice 0.804                                                                                                                               
+Epoch 15 | TrainLoss 0.1812 | ValLoss 0.1623 | ValDice 0.804                                                                                                                               
+Epoch 16 | TrainLoss 0.1806 | ValLoss 0.1578 | ValDice 0.804                                                                                                                               
+Epoch 17 | TrainLoss 0.1773 | ValLoss 0.1236 | ValDice 0.838                                                                                                                               
+Epoch 18 | TrainLoss 0.1511 | ValLoss 0.1721 | ValDice 0.804                                                                                                                               
+Epoch 19 | TrainLoss 0.1837 | ValLoss 0.1597 | ValDice 0.804                                                                                                                               
+Epoch 20 | TrainLoss 0.1809 | ValLoss 0.1652 | ValDice 0.804                                                                                                                               
+
+Test results
+────────── Evaluation Summary ──────────
+Images        : 1036
+Pixel Dice    : 0.861
+Pixel IoU     : 0.838
+Precision     : 0.902
+Recall        : 0.766
+Specificity   : 0.980
+Elapsed       : 1.4s
+
+Training curve - In this I tried with alpha values for the loss - alpha is 40
+Epoch 01 | TrainLoss 0.5866 | ValLoss 0.6364 | ValDice 0.537                                                                                                                               
+  ↳ New best model saved (Dice=0.537)
+Epoch 02 | TrainLoss 0.4349 | ValLoss 0.5777 | ValDice 0.692                                                                                                                               
+  ↳ New best model saved (Dice=0.692)
+Epoch 03 | TrainLoss 0.3924 | ValLoss 0.5520 | ValDice 0.712                                                                                                                               
+  ↳ New best model saved (Dice=0.712)
+Epoch 04 | TrainLoss 0.3700 | ValLoss 0.5323 | ValDice 0.727                                                                                                                               
+  ↳ New best model saved (Dice=0.727)
+Epoch 05 | TrainLoss 0.3612 | ValLoss 0.5245 | ValDice 0.894                                                                                                                               
+  ↳ New best model saved (Dice=0.894)
+Epoch 06 | TrainLoss 0.3554 | ValLoss 0.5216 | ValDice 0.917                                                                                                                               
+  ↳ New best model saved (Dice=0.917)
+Epoch 07 | TrainLoss 0.3552 | ValLoss 0.5149 | ValDice 0.894                                                                                                                               
+Epoch 08 | TrainLoss 0.3307 | ValLoss 0.7126 | ValDice 0.110                                                                                                                               
+Epoch 09 | TrainLoss 0.2756 | ValLoss 0.2249 | ValDice 0.761                                                                                                                               
+Epoch 10 | TrainLoss 0.2180 | ValLoss 0.1858 | ValDice 0.816                                                                                                                               
+Epoch 11 | TrainLoss 0.1541 | ValLoss 0.1323 | ValDice 0.855                                                                                                                               
+Epoch 12 | TrainLoss 0.1206 | ValLoss 0.1705 | ValDice 0.814                                                                                                                               
+Epoch 13 | TrainLoss 0.0991 | ValLoss 0.1317 | ValDice 0.844                                                                                                                               
+Epoch 14 | TrainLoss 0.1152 | ValLoss 0.1270 | ValDice 0.844                                                                                                                               
+Epoch 15 | TrainLoss 0.1048 | ValLoss 0.0968 | ValDice 0.881                                                                                                                               
+Epoch 16 | TrainLoss 0.1038 | ValLoss 0.0954 | ValDice 0.875                                                                                                                               
+Epoch 17 | TrainLoss 0.0803 | ValLoss 0.0837 | ValDice 0.886                                                                                                                               
+Epoch 18 | TrainLoss 0.0716 | ValLoss 0.0864 | ValDice 0.886                                                                                                                               
+Epoch 19 | TrainLoss 0.0902 | ValLoss 0.0681 | ValDice 0.907                                                                                                                               
+Epoch 20 | TrainLoss 0.0848 | ValLoss 0.0745 | ValDice 0.897 
+
+Test - 
+Images        : 1036
+Pixel Dice    : 0.898
+Pixel IoU     : 0.869
+Precision     : 0.802
+Recall        : 0.990
+Specificity   : 0.940
+Elapsed       : 1.7s
+
+
+False-negative images (bad → predicted good):
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/09_08_2024_18_21_00.844774_classifier_input.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/16_08_2024_13_34_25.067846_classifier_input.png
+
+Training curve - In this I tried with alpha values for the loss - alpha is 40 - this time I have printed the BCE loss too.
+
+Path to model is  - unet_final.pt and unet_best_loss40_60
+
+Epoch 01 │ Train loss 0.5858 (BCE 0.3255, Dice 0.024) │ Val loss 0.4609 (BCE 0.1332, Dice 0.651)                                                                                           
+  ↳ New best model saved (Dice 0.651)
+Epoch 02 │ Train loss 0.4266 (BCE 0.0853, Dice 0.061) │ Val loss 0.3971 (BCE 0.0497, Dice 0.843)                                                                                           
+  ↳ New best model saved (Dice 0.843)
+Epoch 03 │ Train loss 0.3877 (BCE 0.0412, Dice 0.093) │ Val loss 0.3738 (BCE 0.0291, Dice 0.893)                                                                                           
+  ↳ New best model saved (Dice 0.893)
+Epoch 04 │ Train loss 0.3693 (BCE 0.0268, Dice 0.117) │ Val loss 0.3604 (BCE 0.0210, Dice 0.825)                                                                                           
+Epoch 05 │ Train loss 0.3606 (BCE 0.0208, Dice 0.130) │ Val loss 0.3552 (BCE 0.0165, Dice 0.887)                                                                                           
+Epoch 06 │ Train loss 0.3556 (BCE 0.0180, Dice 0.138) │ Val loss 0.3533 (BCE 0.0141, Dice 0.923)                                                                                           
+  ↳ New best model saved (Dice 0.923)
+Epoch 07 │ Train loss 0.3521 (BCE 0.0250, Dice 0.157) │ Val loss 1.1804 (BCE 1.3263, Dice 0.139)                                                                                           
+Epoch 08 │ Train loss 0.3112 (BCE 0.0491, Dice 0.296) │ Val loss 0.2019 (BCE 0.0597, Dice 0.821)                                                                                           
+Epoch 09 │ Train loss 0.2772 (BCE 0.0653, Dice 0.405) │ Val loss 0.1912 (BCE 0.0779, Dice 0.794)                                                                                           
+Epoch 10 │ Train loss 0.2014 (BCE 0.0614, Dice 0.589) │ Val loss 0.1269 (BCE 0.0573, Dice 0.805)                                                                                           
+Epoch 11 │ Train loss 0.1316 (BCE 0.0536, Dice 0.751) │ Val loss 0.1584 (BCE 0.0321, Dice 0.686)                                                                                           
+Epoch 12 │ Train loss 0.1087 (BCE 0.0490, Dice 0.802) │ Val loss 0.0816 (BCE 0.0311, Dice 0.850)                                                                                           
+Epoch 13 │ Train loss 0.1129 (BCE 0.0618, Dice 0.810) │ Val loss 0.0961 (BCE 0.0577, Dice 0.853)                                                                                           
+Epoch 14 │ Train loss 0.1404 (BCE 0.0822, Dice 0.772) │ Val loss 0.1357 (BCE 0.0844, Dice 0.807)                                                                                           
+Epoch 15 │ Train loss 0.1215 (BCE 0.0770, Dice 0.812) │ Val loss 0.0998 (BCE 0.0621, Dice 0.861)                                                                                           
+Epoch 16 │ Train loss 0.1007 (BCE 0.0670, Dice 0.849) │ Val loss 0.1567 (BCE 0.0440, Dice 0.801)                                                                                           
+Epoch 17 │ Train loss 0.0875 (BCE 0.0574, Dice 0.867) │ Val loss 0.0724 (BCE 0.0399, Dice 0.892)                                                                                           
+Epoch 18 │ Train loss 0.0841 (BCE 0.0529, Dice 0.869) │ Val loss 0.0781 (BCE 0.0515, Dice 0.889)                                                                                           
+Epoch 19 │ Train loss 0.0759 (BCE 0.0478, Dice 0.882) │ Val loss 0.0580 (BCE 0.0304, Dice 0.908)                                                                                           
+Epoch 20 │ Train loss 0.0715 (BCE 0.0416, Dice 0.884) │ Val loss 0.0581 (BCE 0.0312, Dice 0.907)                                                                                           
+  ↳ Final model saved (Dice 0.923)
+
+Test Results for unet_best_loss40_60.pt
+────────── Evaluation Summary ──────────
+Images        : 1036
+Pixel Dice    : 0.923
+Pixel IoU     : 0.895
+Precision     : 0.899
+Recall        : 0.995
+Specificity   : 0.972
+Elapsed       : 1.4s
+
+False-negative images (bad → predicted good):
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/16_08_2024_13_34_25.067846_classifier_input.png
+
+Test Results for unet_final.pt
+
+────────── Evaluation Summary ──────────
+Images        : 1036
+Pixel Dice    : 0.907
+Pixel IoU     : 0.878
+Precision     : 0.969
+Recall        : 0.922
+Specificity   : 0.993
+Elapsed       : 1.4s
+
+False-negative images (bad → predicted good):
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/09_08_2024_18_21_00.844774_classifier_input.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/16_08_2024_13_34_25.067846_classifier_input.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/23_09_2024_12_09_28.917367_cls_input.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code00972.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01048.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01068.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01115.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01139.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01241.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code01951.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code02029.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03669.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03757.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03769.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03810.png
+   /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test/bad/Code03819.png
+
+
+We reject the model that was saved in the final epoch despite having lower loss value it has f1 score of 0.9448 whereas of model that was saved using best val accuracy gives
+score of 0.9439. But the recall and precision are tradeoff - so If we want to make lesser amount of predictions in good category those were in bad so we can choose the latter.
+So the choosen model shpould be unet_best_loss40_60.pt

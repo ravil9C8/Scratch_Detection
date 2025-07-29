@@ -8,3 +8,4 @@ train unet
 python -m models.unet.train_unet --root /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/train --bs 16 --epochs 20 --lr 2e-4 --out /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/weights/unet
 
 test unet
+python -m models.unet.test_unet --root /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/data/anomaly_detection_test_data/test --ckpt /mnt/nvme_disk2/User_data/rp926k/Scratch_Detection/weights/unet/unet_best.pt --bs 16

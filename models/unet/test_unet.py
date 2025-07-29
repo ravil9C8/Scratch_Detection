@@ -83,7 +83,7 @@ def main():
     # rebuild model
     model = smp.Unet("resnet34", encoder_weights=None, in_channels=3,
                      classes=1, activation=None).to(args.device)
-    ckpt  = torch.load(args.ckpt, map_location="cpu")["model"]
+    ckpt  = torch.load(args.ckpt, map_location="cpu")['model']
     model.load_state_dict(ckpt); model.eval()
 
     TP=FP=TN=FN=0; total_dice=[]; total_iou=[]; fn_paths=[]

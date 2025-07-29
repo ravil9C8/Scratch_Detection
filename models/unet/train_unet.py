@@ -123,10 +123,11 @@ def dice_loss(pred, target, smooth=1):
     dice   = (2*inter + smooth) / (union + smooth)
     return 1 - dice.mean()
 
+# … previous imports & code remain unchanged …
 
-# ------------------------------------------------------------
-# 4.  Main training loop ─────────────────────────────────────
-# ------------------------------------------------------------
+# ─────────────────────────────────────────────────────────────
+# 4.  Main training loop
+# ─────────────────────────────────────────────────────────────
 def main():
     args = parse_args()
     seed_everything(args.seed)
@@ -143,51 +144,95 @@ def main():
         activation=None,
     ).to(device)
 
-    opt  = torch.optim.AdamW(model.parameters(), lr=args.lr)
-    best_dice = 0.0
+    opt           = torch.optim.AdamW(model.parameters(), lr=args.lr)
+    best_dice     = 0.0
+    alpha         = 0.4                    # weight for Dice in the mixed loss
 
-    for epoch in range(1, args.epochs+1):
+    for epoch in range(1, args.epochs + 1):
         # ───── TRAIN ───────────────────────────────────────
-        model.train(); tr_loss = 0.0
+        model.train()
+        tr_loss, tr_bce, tr_dice = 0.0, 0.0, 0.0
         pbar = tqdm(train_loader, desc=f"Epoch {epoch:02d} [Train]", leave=False)
+
         for x, y in pbar:
             x, y = x.to(device), y.to(device)
             opt.zero_grad()
+
             logits = model(x)
-            loss = 0.6*dice_loss(logits, y) + 0.4*F.binary_cross_entropy_with_logits(logits, y)
-            loss.backward(); opt.step()
-            tr_loss += loss.item()*x.size(0)
+            dice   = dice_loss(logits, y)
+            bce    = F.binary_cross_entropy_with_logits(logits, y)
+            loss   = alpha * dice + (1 - alpha) * bce
+            loss.backward()
+            opt.step()
+
+            # accumulate batch metrics
+            bs            = x.size(0)
+            tr_loss += loss.item() * bs
+            tr_bce  += bce.item()  * bs
+            tr_dice += (1 - dice.item()) * bs         # covert loss back to Dice score
+
             pbar.set_postfix(loss=loss.item())
 
         # ───── VALIDATE ────────────────────────────────────
-        model.eval(); val_loss = 0.0; dices = []
-        val_bar = tqdm(val_loader, desc=f"Epoch {epoch:02d} [Val]  ", leave=False)
+        model.eval()
+        val_loss, val_dice_list, val_bce = 0.0, [], 0.0
+        val_bar = tqdm(val_loader, desc=f"Epoch {epoch:02d} [Val]", leave=False)
+
         with torch.no_grad():
             for x, y in val_bar:
                 x, y = x.to(device), y.to(device)
                 logits = model(x)
-                loss = 0.6*dice_loss(logits, y) + 0.4*F.binary_cross_entropy_with_logits(logits, y)
-                val_loss += loss.item()*x.size(0)
+                dice   = dice_loss(logits, y)
+                bce    = F.binary_cross_entropy_with_logits(logits, y)
+                loss   = alpha * dice + (1 - alpha) * bce
+
+                bs          = x.size(0)
+                val_loss   += loss.item() * bs
+                val_bce    += bce.item()  * bs
 
                 preds = (torch.sigmoid(logits) > 0.5).float()
-                inter = (preds * y).sum((1,2,3))
-                union = preds.sum((1,2,3)) + y.sum((1,2,3))
-                dices += list(((2*inter + 1) / (union + 1)).cpu().numpy())
-                val_bar.set_postfix(dice=np.mean(dices))
+                inter = (preds * y).sum((1, 2, 3))
+                union = preds.sum((1, 2, 3)) + y.sum((1, 2, 3))
+                val_dice_list += list(((2 * inter + 1) / (union + 1)).cpu().numpy())
 
-        mean_dice = float(np.mean(dices))
-        print(f"Epoch {epoch:02d} | TrainLoss {tr_loss/len(train_loader.dataset):.4f} "
-              f"| ValLoss {val_loss/len(val_loader.dataset):.4f} | ValDice {mean_dice:.3f}")
+                val_bar.set_postfix(dice=np.mean(val_dice_list))
 
-        if mean_dice > best_dice:
-            best_dice = mean_dice
-            torch.save({"model": model.state_dict(),
-                        "epoch": epoch,
-                        "val_dice": best_dice},
-                       Path(args.out) / "unet_best.pt")
-            print(f"  ↳ New best model saved (Dice={best_dice:.3f})")
+        # epoch-level averages
+        n_train = len(train_loader.dataset)
+        n_val   = len(val_loader.dataset)
 
-    print(f"Training complete — best Dice {best_dice:.3f} stored in {args.out}/unet_best.pt")
+        mean_tr_loss = tr_loss / n_train
+        mean_tr_bce  = tr_bce  / n_train
+        mean_tr_dice = tr_dice / n_train
+
+        mean_val_loss = val_loss / n_val
+        mean_val_bce  = val_bce  / n_val
+        mean_val_dice = float(np.mean(val_dice_list))
+
+        print(
+            f"Epoch {epoch:02d} │ "
+            f"Train loss {mean_tr_loss:.4f} (BCE {mean_tr_bce:.4f}, Dice {mean_tr_dice:.3f}) │ "
+            f"Val loss {mean_val_loss:.4f} (BCE {mean_val_bce:.4f}, Dice {mean_val_dice:.3f})"
+        )
+
+        # checkpoint on best validation Dice
+        if mean_val_dice > best_dice:
+            best_dice = mean_val_dice
+            torch.save(
+                {"model": model.state_dict(), "epoch": epoch, "val_dice": best_dice},
+                Path(args.out) / "unet_best_loss40_60.pt",
+            )
+            print(f"  ↳ New best model saved (Dice {best_dice:.3f})")
+
+        # save final weights at end of training
+        if epoch == args.epochs:
+            torch.save(
+                {"model": model.state_dict(), "epoch": epoch, "val_dice": best_dice},
+                Path(args.out) / "unet_final.pt",
+            )
+            print(f"  ↳ Final model saved (Dice {best_dice:.3f})")
+
+    print(f"Training complete — best Dice {best_dice:.3f} stored in unet_best_loss40_60.pt")
 
 if __name__ == "__main__":
     main()
