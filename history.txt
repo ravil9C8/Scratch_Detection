@@ -18,3 +18,41 @@ Precision   : 1.000
 Recall      : 0.961
 Specificity : 1.000
 Elapsed     : 62.1s
+False-Negative images (predicted good but actually bad):
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/09_08_2024_18_21_00.844774_classifier_input.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/16_08_2024_13_34_25.067846_classifier_input.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/23_09_2024_12_09_28.917367_cls_input.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code02029.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code03669.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code03757.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code03810.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code03819.png
+
+3rd iteration
+I tried out the resizing method instead of the letterboxing technique. The results were not best. Then i tried letterboxing technique.
+(assignment-mowito) ravil@ravil-ThinkPad-E14-Gen-5:~/assignment_mowito$ python -m models.classifier.train --root /home/ravil/assignment_mowito/data/anomaly_detection_test_data/train --epochs 1 --bs 16 --lr 3e-4 --out /home/ravil/assignment_mowito/weights/classifier
+Epoch 01:   0%|                                                                                                                                                    | 0/234 [00:00<?, ?it/s]/home/ravil/assignment_mowito/.venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:665: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+Validation
+Epoch 01: loss 0.4656  recall 0.963  precision 0.963                                                                         
+Training done. Best recall 0.963 saved to /home/ravil/assignment_mowito/weights/classifier/
+
+Path to saved model - /home/ravil/assignment_mowito/weights/classifier/densenet121_without_letterboxing.pt
+
+Path  to image where the images are transofrmed using resizing technique - /home/ravil/assignment_mowito/visualize_images/transforms_visualize/transforms_resize.png
+
+Test
+Evaluation complete ───────────────
+Samples     : 1036  (good=831, bad=205)
+TP / FP / TN / FN : 199 / 4 / 827 / 6
+Precision   : 0.980
+Recall      : 0.971
+Specificity : 0.995
+
+False-Negative images (predicted good but actually bad):
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/09_08_2024_18_21_00.844774_classifier_input.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/16_08_2024_13_34_25.067846_classifier_input.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code00058.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code01864.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code01951.png
+  /home/ravil/assignment_mowito/data/anomaly_detection_test_data/test/bad/Code03810.png
