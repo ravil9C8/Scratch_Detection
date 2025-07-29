@@ -21,7 +21,7 @@ The system uses:
 1. Clone the repository:
    ```bash
    git clone https://github.com/ravil9C8/Scratch_Detection.git
-   cd scratch-detection
+   cd Scratch_Detection
 
 2. Create and activate a virtual environment
    ```bash
